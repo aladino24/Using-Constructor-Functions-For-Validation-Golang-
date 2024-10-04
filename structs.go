@@ -43,8 +43,13 @@ func main() {
 
 	// ... do something awesome with that gathered data!
 
-	var appUser user
-	appUser = newUser(userFirstName, userLastName, userBirthdate)
+	var appUser *user
+	appUser, err := newUser(userFirstName, userLastName, userBirthdate)
+
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
 
 	appUser.outputUserDetails()
 	appUser.clearUserName()
@@ -58,6 +63,6 @@ func main() {
 func getUserData(promptText string) string {
 	fmt.Print(promptText)
 	var value string
-	fmt.Scan(&value)
+	fmt.Scanln(&value)
 	return value
 }
